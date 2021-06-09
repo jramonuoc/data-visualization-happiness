@@ -1,0 +1,38 @@
+---
+title: "Untitled"
+author: "JRamon"
+date: "6/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Aclaraciones:
+
+Al principio, el archivo world-happiness-report-modi.csv tenía como separador de campos el punto y coma. Por otro lado, el separador decimal era la coma, pero para preparar los datos correctamente para Tableau, cambiaremos este por un punto, haciendo así los campos numéricos de una manera clara.
+
+```{r, echo=FALSE}
+data <- read.csv("world_happiness-report-modi.csv", sep=";", dec=",")
+```
+
+```{r, echo=FALSE}
+#Check data type
+str(data)
+```
+```{r, echo=FALSE}
+#Example from previous exercise, in order to create continents from country
+library(countrycode)
+
+x <- countrycode(sourcevar = data[,"country"],
+                            origin = "country.name",
+                            destination = "continent")
+```
+
+
+
+```{r,echo=FALSE}
+#Export result
+write.csv2(data,"world-happiness-report.csv")
+```
